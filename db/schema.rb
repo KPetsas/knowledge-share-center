@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326212451) do
+ActiveRecord::Schema.define(version: 20170327211946) do
 
   create_table "experts", force: :cascade do |t|
     t.string   "expertname"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170326212451) do
     t.text     "instructions"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "expert_id"
   end
 
 end
