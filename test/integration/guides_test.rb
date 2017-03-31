@@ -19,8 +19,17 @@ class GuidesTest < ActionDispatch::IntegrationTest
   test "should get guides list" do
     get guides_path
     assert_template 'guides/index'
+    # assert_match @guide.title, response.body
+    assert_select "a[href=?]", guide_path(@guide), text: @guide.title
+    assert_select "a[href=?]", guide_path(@guide2), text: @guide2.title
+  end
+
+  test "should get guides show" do
+    get guide_path(@guide)
+    assert_template 'guides/show'
     assert_match @guide.title, response.body
-    assert_match @guide2.title, response.body
+    assert_match @guide.instructions, response.body
+    assert_match @user.expertname, response.body
   end
 
 end
