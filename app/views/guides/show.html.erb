@@ -4,9 +4,10 @@
   <div class="well col-md-8 col-md-offset-2">
     <h4 class="center instructions"><strong>Instructions: </strong></h4>
     <hr/>
-    
+
     <%= simple_format(@guide.instructions) %>
 
+    <hr/>
     <div class="pull-right">
       <p class="center">
         <em>Created by:</em>
@@ -15,7 +16,7 @@
         <%= link_to avatar_for(@guide.expert), guides_path %>
       </p>
       <p class="center">
-        <small><%= @guide.expert.expertname.capitalize %></small>
+        <small><%= @guide.expert.expertname %></small>
         <div class="pull-right"><%= time_ago_in_words(@guide.created_at) %> ago</div>
       </p>
     </div>
