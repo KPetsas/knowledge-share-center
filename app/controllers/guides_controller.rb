@@ -1,12 +1,5 @@
 class GuidesController < ApplicationController
-
-  def index
-    @guides = Guide.all
-  end
-
-  def show
-    @guide = Guide.find(params[:id])
-  end
+  before_action :get_guide_id, only: [:show, :edit, :update, :destroy]
 
   def new
     @guide = Guide.new
@@ -23,12 +16,13 @@ class GuidesController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def edit
-    @guide = Guide.find(params[:id])
   end
 
   def update
-    @guide = Guide.find(params[:id])
     if @guide.update(guide_params)
       flash[:success] = "Guide was successfully updated!"
       redirect_to guide_path(@guide)
@@ -37,8 +31,11 @@ class GuidesController < ApplicationController
     end
   end
 
+  def index
+    @guides = Guide.all
+  end
+
   def destroy
-    @guide = Guide.find(params[:id])
     @guide.destroy
     flash[:success] = "Guide deleted successfully"
     redirect_to guides_path
@@ -46,6 +43,10 @@ class GuidesController < ApplicationController
 
 
   private
+
+    def get_guide_id
+      @guide = Guide.find(params[:id])
+    end
 
     def guide_params
       params.require(:guide).permit(:title, :instructions)

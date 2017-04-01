@@ -32,6 +32,7 @@ class GuidesTest < ActionDispatch::IntegrationTest
     assert_match @user.expertname, response.body
     assert_select "a[href=?]", edit_guide_path(@guide), text: "Edit this guide"
     assert_select "a[href=?]", guide_path(@guide), text: "Delete this guide"
+    assert_select "a[href=?]", guides_path, text: "Go back to guides list"
   end
 
   test "create new valid guide" do
