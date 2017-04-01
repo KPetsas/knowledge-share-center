@@ -73,3 +73,11 @@ $navbar-default-bg: black;
 .colorlink a {
   color: #076B15;
 }
+
+.guide-actions {
+  padding-top: 5px;
+  // thank you scss
+  a {
+    color: #fff
+  }
+}
