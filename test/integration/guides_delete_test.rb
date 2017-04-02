@@ -3,7 +3,8 @@ require 'test_helper'
 class GuidesDeleteTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = Expert.create!(expertname: "TestUser", email: "test@example.com")
+    @user = Expert.create!(expertname: "TestUser", email: "test@example.com",
+                        password: "password", password_confirmation: "password")
     @guide = Guide.create(title: "How to test a new feature of my application?", instructions: "Write integration tests.", expert: @user)
   end
 

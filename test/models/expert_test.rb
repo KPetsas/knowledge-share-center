@@ -3,7 +3,8 @@ require 'test_helper'
 class ExpertTest < ActiveSupport::TestCase
 
   def setup
-    @expert = Expert.new(expertname: "KPetsas", email: "kpetsas@example.com")
+    @expert = Expert.new(expertname: "KPetsas", email: "kpetsas@example.com",
+                        password: "password", password_confirmation: "password")
   end
 
   test "expert model should be valid" do
@@ -58,6 +59,16 @@ class ExpertTest < ActiveSupport::TestCase
     @expert.email = email
     @expert.save
     assert_equal email.downcase, @expert.reload.email
+  end
+
+  test "password should be present" do
+    @expert.password = @expert.password_confirmation = " "
+    assert_not @expert.valid?
+  end
+
+  test "password should be at least 5 characters" do
+    @expert.password = @expert.password_confirmation = "p" * 4
+    assert_not @expert.valid?
   end
 
 end

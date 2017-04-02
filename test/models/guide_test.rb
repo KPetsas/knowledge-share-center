@@ -3,7 +3,8 @@ require 'test_helper'
 class GuideTest < ActiveSupport::TestCase
 
   def setup
-    @expert = Expert.create!(expertname: "User", email: "user@example.com")
+    @expert = Expert.create!(expertname: "User", email: "user@example.com",
+                        password: "password", password_confirmation: "password")
     @guide = @expert.guides.build(title: "How to test my application models?", instructions: "Run unit tests!")
   end
 
