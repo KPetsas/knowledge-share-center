@@ -37,6 +37,13 @@ class ExpertsController < ApplicationController
     end
   end
 
+  def destroy
+    @expert = Expert.find(params[:id])
+    @expert.destroy
+    flash[:danger] = "Expert and all associated guides have been deleted"
+    redirect_to experts_path
+  end
+
 
   private
 

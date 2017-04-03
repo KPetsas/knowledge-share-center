@@ -16,4 +16,14 @@ class ExpertsIndexTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", expert_path(@expert2), text: @expert2.expertname
   end
 
+  test "should delete expert" do
+    get experts_path
+    assert_template 'experts/index'
+    assert_difference 'Expert.count', -1 do
+      delete expert_path(@expert)
+    end
+    assert_redirected_to experts_path
+    assert_not flash.empty?
+  end
+
 end

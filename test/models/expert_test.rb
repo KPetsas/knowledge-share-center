@@ -71,4 +71,12 @@ class ExpertTest < ActiveSupport::TestCase
     assert_not @expert.valid?
   end
 
+  test "associated guides should be destroyed" do
+    @expert.save
+    @expert.guides.create!(title: "Testing destroy", instructions: "Testing destroy funcion")
+    assert_difference 'Guide.count', -1 do
+      @expert.destroy
+    end
+  end
+
 end

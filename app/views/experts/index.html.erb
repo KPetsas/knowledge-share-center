@@ -9,6 +9,8 @@
           <li><%= link_to avatar_for(expert), expert_path(expert) %></li>
           <li class="expert-title"><%= link_to expert.expertname, expert_path(expert) %></li>
           <li><small><%= pluralize(expert.guides.count, "guide") if expert.guides %></small></li>
+          <li><%= link_to "Delete expert", expert_path(expert), method: :delete,
+                data: { confirm: "Are you sure you want to delete the expert and all associated guides?" } %></li>
         </div>
       </div>
     </ul>

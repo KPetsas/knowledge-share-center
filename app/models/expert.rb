@@ -5,7 +5,7 @@ class Expert < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: {case_sensitive: false}
-  has_many :guides
+  has_many :guides, dependent: :destroy
   has_secure_password
   # has_secure_password enforces the user to set password and password_confirmation
   # on sign up, even if allow_nil is true (we need that for the edit action)
