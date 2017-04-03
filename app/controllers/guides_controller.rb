@@ -1,6 +1,13 @@
 class GuidesController < ApplicationController
   before_action :get_guide_id, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @guides = Guide.paginate(page: params[:page], per_page: 5)
+  end
+
+  def show
+  end
+
   def new
     @guide = Guide.new
   end
@@ -16,9 +23,6 @@ class GuidesController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def edit
   end
 
@@ -29,10 +33,6 @@ class GuidesController < ApplicationController
     else
       render 'edit'
     end
-  end
-
-  def index
-    @guides = Guide.all
   end
 
   def destroy

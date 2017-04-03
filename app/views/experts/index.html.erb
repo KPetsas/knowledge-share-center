@@ -1,0 +1,17 @@
+<%= render 'shared/page_title', title: "Showing all experts" %>
+
+<div align="center">
+  <%= will_paginate %>
+  <% @experts.each do |expert| %>
+    <ul class="listing">
+      <div class="row">
+        <div class="well col-md-4 col-md-offset-4">
+          <li><%= link_to avatar_for(expert), expert_path(expert) %></li>
+          <li class="expert-title"><%= link_to expert.expertname, expert_path(expert) %></li>
+          <li><small><%= pluralize(expert.guides.count, "guide") if expert.guides %></small></li>
+        </div>
+      </div>
+    </ul>
+  <% end %>
+  <%= will_paginate %>
+</div>

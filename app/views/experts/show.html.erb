@@ -6,4 +6,13 @@
 </div>
 
 <h4 align="center"><%= @expert.expertname %>'s guides</h4>
-<%= render 'guides/guide', object: @expert.guides %>
+
+<div align="center">
+  <%= will_paginate @expert_guides %>
+</div>
+
+<%= render 'guides/guide', object: @expert_guides %>
+
+<div align="center">
+  <%= will_paginate @expert_guides %>
+</div>

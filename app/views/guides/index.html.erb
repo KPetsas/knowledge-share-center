@@ -1,3 +1,11 @@
 <%= render 'shared/page_title', title: "Listing all guides" %>
 
+<div align="center">
+  <%= will_paginate %>
+</div>
+
 <%= render 'guide', object: @guides %>
+
+<div align="center">
+  <%= will_paginate %>
+</div>

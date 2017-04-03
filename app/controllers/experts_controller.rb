@@ -1,5 +1,14 @@
 class ExpertsController < ApplicationController
 
+  def index
+    @experts = Expert.paginate(page: params[:page], per_page: 5)
+  end
+
+  def show
+    @expert = Expert.find(params[:id])
+    @expert_guides = @expert.guides.paginate(page: params[:page], per_page: 5)
+  end
+
   def new
     @expert = Expert.new
   end
@@ -12,10 +21,6 @@ class ExpertsController < ApplicationController
     else
       render 'new'
     end
-  end
-
-  def show
-    @expert = Expert.find(params[:id])
   end
 
   def edit
