@@ -18,6 +18,20 @@ class ExpertsController < ApplicationController
     @expert = Expert.find(params[:id])
   end
 
+  def edit
+    @expert = Expert.find(params[:id])
+  end
+
+  def update
+    @expert = Expert.find(params[:id])
+    if @expert.update(expert_params)
+      flash[:success] = "Your account was updated successfully!"
+      redirect_to @expert
+    else
+      render 'edit'
+    end
+  end
+
 
   private
 

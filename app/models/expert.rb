@@ -7,5 +7,7 @@ class Expert < ApplicationRecord
                     uniqueness: {case_sensitive: false}
   has_many :guides
   has_secure_password
-  validates :password, presence: true, length: { minimum: 5 }
+  # has_secure_password enforces the user to set password and password_confirmation
+  # on sign up, even if allow_nil is true (we need that for the edit action)
+  validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
 end
