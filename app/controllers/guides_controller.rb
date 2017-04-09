@@ -1,5 +1,7 @@
 class GuidesController < ApplicationController
   before_action :get_guide_id, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_owner, only: [:edit, :update, :destroy]
 
   def index
     @guides = Guide.paginate(page: params[:page], per_page: 5)
@@ -12,18 +14,18 @@ class GuidesController < ApplicationController
     @guide = Guide.new
   end
 
+  def edit
+  end
+
   def create
     @guide = Guide.new(guide_params)
-    @guide.expert = Expert.first  # temporary until experts (users) are created
+    @guide.expert = current_user
     if @guide.save
       flash[:success] = "Guide was created successfully!"
       redirect_to guide_path(@guide)
     else
       render 'new'
     end
-  end
-
-  def edit
   end
 
   def update
@@ -50,6 +52,13 @@ class GuidesController < ApplicationController
 
     def guide_params
       params.require(:guide).permit(:title, :instructions)
+    end
+
+    def require_owner
+      if current_user != @guide.expert
+        flash[:danger] = "You can edit or delete only your own guides"
+        redirect_to guides_path
+      end
     end
 
 end

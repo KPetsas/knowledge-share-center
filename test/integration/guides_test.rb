@@ -26,6 +26,7 @@ class GuidesTest < ActionDispatch::IntegrationTest
   end
 
   test "should get guides show" do
+    sign_in_as(@user, "password")
     get guide_path(@guide)
     assert_template 'guides/show'
     assert_match @guide.title, response.body
@@ -37,6 +38,7 @@ class GuidesTest < ActionDispatch::IntegrationTest
   end
 
   test "create new valid guide" do
+    sign_in_as(@user, "password")
     get new_guide_path
     assert_template 'guides/new'
     title_of_guide = "How to cook chicken saute"
@@ -50,6 +52,7 @@ class GuidesTest < ActionDispatch::IntegrationTest
   end
 
   test "reject invalid guide submissions" do
+    sign_in_as(@user, "password")
     get new_guide_path
     assert_template 'guides/new'
     assert_no_difference 'Guide.count' do

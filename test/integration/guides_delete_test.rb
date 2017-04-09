@@ -9,6 +9,7 @@ class GuidesDeleteTest < ActionDispatch::IntegrationTest
   end
 
   test "successfully delete a guide" do
+    sign_in_as(@user, "password")
     # go to the show route
     get guide_path(@guide)
     assert_template 'guides/show'

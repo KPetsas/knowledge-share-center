@@ -9,6 +9,7 @@ class GuidesEditTest < ActionDispatch::IntegrationTest
   end
 
   test "reject invalid guide update" do
+    sign_in_as(@user, "password")
     get edit_guide_path(@guide)
     assert_template 'guides/edit'
     patch guide_path(@guide), params: { guide: { title: " ", instructions: "some instructions..." } }
@@ -19,6 +20,7 @@ class GuidesEditTest < ActionDispatch::IntegrationTest
   end
 
   test "successful guide edit action" do
+    sign_in_as(@user, "password")
     get edit_guide_path(@guide)
     assert_template 'guides/edit'
     updated_title = "my updated guide"

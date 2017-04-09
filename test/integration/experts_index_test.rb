@@ -17,6 +17,7 @@ class ExpertsIndexTest < ActionDispatch::IntegrationTest
   end
 
   test "should delete expert" do
+    sign_in_as(@expert, "password")
     get experts_path
     assert_template 'experts/index'
     assert_difference 'Expert.count', -1 do

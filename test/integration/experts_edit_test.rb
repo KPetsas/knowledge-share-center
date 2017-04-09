@@ -8,6 +8,7 @@ class ExpertsEditTest < ActionDispatch::IntegrationTest
   end
 
   test "reject an invalid edit" do
+    sign_in_as(@user, "password")
     get edit_expert_path(@user)
     assert_template 'experts/edit'
     # The has_secure_password does not enforce to have password and password_confirmation in the edit request
@@ -18,6 +19,7 @@ class ExpertsEditTest < ActionDispatch::IntegrationTest
   end
 
   test "accept a valid edit" do
+    sign_in_as(@user, "password")
     get edit_expert_path(@user)
     assert_template 'experts/edit'
     expert_new_name = "User-001"

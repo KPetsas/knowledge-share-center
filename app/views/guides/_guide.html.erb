@@ -11,7 +11,14 @@
       <p>
         <span class="quiet"><small>Created <%= time_ago_in_words(guide.created_at) %> ago</small></span>
       </p>
-
+      <% if logged_in? && current_user == guide.expert %>
+      <div class="guide-actions">
+        <%= link_to "Edit this guide", edit_guide_path(guide), class: "btn btn-xs btn-warning" %>
+        <%= link_to "Delete this guide", guide_path(guide), method: :delete,
+                                         data: { confirm: "Are you sure you want to delete this guide?" },
+                                         class: "btn btn-xs btn-danger" %>
+      </div>
+      <% end %>
     </div>
   </div>
 <% end %>
