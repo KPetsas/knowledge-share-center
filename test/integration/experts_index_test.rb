@@ -7,6 +7,8 @@ class ExpertsIndexTest < ActionDispatch::IntegrationTest
                         password: "password", password_confirmation: "password")
     @expert2 = Expert.create!(expertname: "Test", email: "secondTest@example.com", password: "password",
                                            password_confirmation: "password")
+    @admin = Expert.create!(expertname: "Admin", email: "admin@example.com", password: "password",
+                                          password_confirmation: "password", admin: true)
   end
 
   test "should get experts list" do
@@ -17,7 +19,7 @@ class ExpertsIndexTest < ActionDispatch::IntegrationTest
   end
 
   test "should delete expert" do
-    sign_in_as(@expert, "password")
+    sign_in_as(@admin, "password")
     get experts_path
     assert_template 'experts/index'
     assert_difference 'Expert.count', -1 do

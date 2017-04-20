@@ -55,7 +55,7 @@ class GuidesController < ApplicationController
     end
 
     def require_owner
-      if current_user != @guide.expert
+      if current_user != @guide.expert and !current_user.admin?
         flash[:danger] = "You can edit or delete only your own guides"
         redirect_to guides_path
       end

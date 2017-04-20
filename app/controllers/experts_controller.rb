@@ -1,6 +1,7 @@
 class ExpertsController < ApplicationController
   before_action :get_expert_id, only: [:show, :edit, :update, :destroy]
   before_action :require_profile_owner, only: [:edit, :update, :destroy]
+  before_action :require_admin, only: [:destroy]
 
   def index
     @experts = Expert.paginate(page: params[:page], per_page: 5)
@@ -39,9 +40,11 @@ class ExpertsController < ApplicationController
   end
 
   def destroy
-    @expert.destroy
-    flash[:danger] = "Expert and all associated guides have been deleted"
-    redirect_to experts_path
+    if !@expert.admin?
+      @expert.destroy
+      flash[:danger] = "Expert and all associated guides have been deleted"
+      redirect_to experts_path
+    end
   end
 
 
@@ -56,9 +59,16 @@ class ExpertsController < ApplicationController
     end
 
     def require_profile_owner
-      if current_user != @expert
+      if current_user != @expert and !current_user.admin?
         flash[:danger] = "You can edit or delete only your own account"
         redirect_to experts_path
+      end
+    end
+
+    def require_admin
+      if logged_in? && !current_user.admin?
+        flash[:danger] = "Only admin users can perform that action"
+        redirect_to root_path
       end
     end
 

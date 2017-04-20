@@ -21,7 +21,7 @@
       </p>
     </div>
     <div class="guide-actions">
-      <% if logged_in? && current_user == @guide.expert %>
+      <% if logged_in? && (current_user == @guide.expert || current_user.admin?) %>
         <%= link_to "Edit this guide", edit_guide_path(@guide), class: "btn btn-xs btn-warning" %>
         <%= link_to "Delete this guide", guide_path(@guide), method: :delete,
                                          data: { confirm: "Are you sure you want to delete this guide?" },
