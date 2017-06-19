@@ -6,4 +6,5 @@ class Guide < ApplicationRecord
   default_scope -> { order(updated_at: :desc) }  # descending order
   has_many :guide_topics
   has_many :topics, through: :guide_topics
+  has_many :comments, dependent: :destroy
 end

@@ -10,4 +10,5 @@ class Expert < ApplicationRecord
   # has_secure_password enforces the user to set password and password_confirmation
   # on sign up, even if allow_nil is true (we need that for the edit action)
   validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
+  has_many :comments, dependent: :destroy
 end
