@@ -4,4 +4,6 @@ class Guide < ApplicationRecord
   belongs_to :expert
   validates :expert_id, presence: true
   default_scope -> { order(updated_at: :desc) }  # descending order
+  has_many :guide_topics
+  has_many :topics, through: :guide_topics
 end
