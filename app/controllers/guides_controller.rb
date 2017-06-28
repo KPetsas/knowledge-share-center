@@ -51,7 +51,7 @@ class GuidesController < ApplicationController
     end
 
     def guide_params
-      params.require(:guide).permit(:title, :instructions)
+      params.require(:guide).permit(:title, :instructions, topic_ids: [])
     end
 
     def require_owner

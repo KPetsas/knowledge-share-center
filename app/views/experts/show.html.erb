@@ -5,14 +5,18 @@
   </div>
 </div>
 
-<h4 align="center"><%= @expert.expertname %>'s guides</h4>
+<% if @expert.guides.count != 0 %>
+  <h4 align="center"><%= @expert.expertname %>'s guides</h4>
 
-<div align="center">
-  <%= will_paginate @expert_guides %>
-</div>
+  <div align="center">
+    <%= will_paginate @expert_guides %>
+  </div>
 
-<%= render 'guides/guide', object: @expert_guides %>
+  <%= render 'guides/guide', object: @expert_guides %>
 
-<div align="center">
-  <%= will_paginate @expert_guides %>
-</div>
+  <div align="center">
+    <%= will_paginate @expert_guides %>
+  </div>
+<% else %>
+  <h4 align="center">No guides yet!</h4>
+<% end %>

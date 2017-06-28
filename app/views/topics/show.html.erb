@@ -1,0 +1,17 @@
+<%= render 'shared/page_title', title: "#{@topic.name}" %>
+
+<% if @topic.guides.count != 0 %>
+  <h4 align="center">Guides containing "<%= @topic.name %>" as main topic</h4>
+
+  <div align="center">
+    <%= will_paginate @topic_guides %>
+  </div>
+
+  <%= render 'guides/guide', object: @topic_guides %>
+
+  <div align="center">
+    <%= will_paginate @topic_guides %>
+  </div>
+<% else %>
+  <h4 align="center">No guides with this topic yet!</h4>
+<% end %>

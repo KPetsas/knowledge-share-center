@@ -8,12 +8,19 @@
     <%= simple_format(@guide.instructions) %>
 
     <hr/>
+
+    <% if @guide.topics.any? %>
+      <p>
+        Topics: <%= render @guide.topics %>
+      </p>
+    <% end %>
+
     <div class="pull-right">
       <p class="center">
         <em>Created by:</em>
       </p>
       <p class="center">
-        <%= link_to avatar_for(@guide.expert), guides_path %>
+        <%= link_to avatar_for(@guide.expert), expert_path(@guide.expert) %>
       </p>
       <p class="center">
         <small><%= @guide.expert.expertname %></small>
