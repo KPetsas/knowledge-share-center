@@ -12,7 +12,8 @@
         <p>Topics: <%= render guide.topics %></p>
       <% end %>
       <p>
-        <span class="quiet"><small>Created <%= time_ago_in_words(guide.created_at) %> ago by <%= guide.expert.expertname %></small></span>
+        <span class="quiet"><small>Created <%= time_ago_in_words(guide.created_at) %> ago by <%= guide.expert.expertname %>
+                                                        | <%= pluralize(guide.comments.count, 'Comment') %></small></span>
       </p>
       <% if logged_in? && (current_user == guide.expert || current_user.admin?) %>
       <div class="guide-actions">

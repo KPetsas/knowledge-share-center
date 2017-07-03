@@ -38,3 +38,48 @@
     </div>
   </div>
 </div>
+
+<% if logged_in? %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h3>Comments:</h3>
+      <hr />
+      <%= form_for([@guide, @comment], :html => {class: "form-horizontal", role: "form"}) do |f| %>
+        <div class="form-group">
+          <div class="control-label col-md-2">
+            <%= f.label :description, "Comment" %>
+          </div>
+          <div class="col-md-8">
+            <%= f.text_area :description, rows:8, class: "form-control", placeholder: "Enter Comment"%>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <%= f.submit "Submit Comment", class: "btn btn-success btn-lg btn-xlarge" %>
+          </div>
+        </div>
+      <% end %>
+      <hr />
+    </div>
+  </div>
+<% end %>
+
+<% if @guide.comments.count != 0 %> <!-- ".count" can be omitted -->
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h3>Comments:</h3>
+      <div id="messages">
+        <!-- "render partial:" is followed by the "object:" keyword, which expects a collection.
+              The @comments instance var is passed in the comments partial as object,
+              so we can refer to this as "comments" in the partial, instead of "@comments" -->
+        <%= render partial: 'comments/comments', object: @comments %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h3>No comments yet!</h3>
+    </div>
+  </div>
+<% end %>
