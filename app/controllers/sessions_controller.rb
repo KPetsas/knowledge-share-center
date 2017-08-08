@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     expert = Expert.find_by(email: params[:session][:email].downcase)
     if expert && expert.authenticate(params[:session][:password])
       session[:expert_id] = expert.id
+      cookies.signed[:expert_id] = expert.id
       flash[:success] = "You have successfully logged in"
       redirect_to expert
     else

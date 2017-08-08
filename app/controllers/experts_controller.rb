@@ -23,6 +23,7 @@ class ExpertsController < ApplicationController
     if @expert.save
       # automatically log in when sign up
       session[:expert_id] = @expert.id
+      cookies.signed[:expert_id] = @expert.id
       flash[:success] = "Welcome #{@expert.expertname} to Knowledge Share Center!"
       redirect_to expert_path(@expert)
     else
